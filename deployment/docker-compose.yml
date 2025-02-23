@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  quantum_environment:
+    build: 
+      context: ..
+      dockerfile: deployment/Dockerfile
+    environment:
+      - QUANTUM_ENVIRONMENT_NUM_QUBITS=2
+      - QUANTUM_ENVIRONMENT_NOISE_LEVEL=0.01
+      - QUANTUM_LOGGING_LEVEL=INFO
+    volumes:
+      - ../data:/app/data
+      - ../logs:/app/logs
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 8G
+    healthcheck:
+      test: ["CMD", "python", "-c", "import qiskit; print('healthy')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=secret
+    depends_on:
+      - prometheus

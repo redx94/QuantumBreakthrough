@@ -1,0 +1,21 @@
+adaptive_error_correction:
+  num_qubits: 2
+  noise_level: 0.01
+  learning_rate: 0.001
+  discount_factor: 0.99
+  episodes: 1000
+  batch_size: 32
+
+hybrid_control:
+  complexity_threshold: 0.7
+  noise_threshold: 0.05
+  quantum_volume_min: 32
+  logging_level: INFO
+
+materials_discovery:
+  latent_dim: 50
+  batch_size: 64
+  epochs: 100
+  learning_rate: 0.0001
+  generator_layers: [256, 512, 256]
+  discriminator_layers: [256, 128, 64]

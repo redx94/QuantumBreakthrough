@@ -1,0 +1,46 @@
+quantum_environment:
+  error_correction:
+    num_qubits: 2
+    error_rate: 0.01
+    optimization_level: 2
+    max_circuit_depth: 100
+    error_detection_scheme: "surface_code"
+    correction_threshold: 0.015
+    validation_rounds: 3
+  
+  security:
+    encryption_algorithm: "AES-256"
+    key_rotation_days: 30
+    
+  monitoring:
+    metrics_enabled: true
+    log_level: "INFO"
+    performance_tracking: true
+    alert_thresholds:
+      max_execution_time: 5.0
+      max_memory_usage: 1024
+      max_circuit_depth: 100
+    metrics_retention_days: 30
+    anomaly_detection:
+      enabled: true
+      sensitivity: 0.8
+
+  logging:
+    file_rotation_bytes: 10485760
+    backup_count: 5
+    structured_logging: true
+
+hybrid_control:
+  thresholds:
+    complexity: 0.7
+    noise: 0.1
+  quantum_volume_min: 32
+
+materials_discovery:
+  model:
+    latent_dim: 50
+    hidden_layers: [256, 128, 64]
+    learning_rate: 0.0001
+  training:
+    batch_size: 32
+    epochs: 100
